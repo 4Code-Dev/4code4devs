@@ -1,7 +1,7 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
 
-const url = 'https://www.4devs.com.br/ferramentas_online.php'
+const url = process.env.FOURDEVS_URL || 'https://www.4devs.com.br/ferramentas_online.php'
 const config = {
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
