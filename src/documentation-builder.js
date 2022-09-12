@@ -1,7 +1,7 @@
 const { gerar, validar } = require('./controllers/as-lib');
 const { writeFileSync } = require('fs');
 const {resolve } = require('path');
-const { item: [{ item: gerarReqList }, { item: validarReqList }] } = require('./../doc/Dev tools.postman_collection.json');
+const { item: [{ item: gerarReqList }, { item: validarReqList }] } = require('../doc/Dev tools.postman_collection.json');
 
 const buildComment = (data, funcName) => `/** ${data} */
 ${funcName}: ${gerar[funcName]},
