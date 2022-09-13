@@ -1,6 +1,6 @@
 const { gerar, validar } = require('./controllers/as-lib');
 const { writeFileSync } = require('fs');
-const {resolve } = require('path');
+const { resolve } = require('path');
 const { item: [{ item: gerarReqList }, { item: validarReqList }] } = require('../doc/Dev tools.postman_collection.json');
 
 const buildComment = (data, funcName) => `/** ${data} */
@@ -49,7 +49,7 @@ const generateDocsFromGerar = () => {
     ${finalContent}
     }
     `;
-    
+
     writeF('gerar.txt', templateFile);
 };
 
@@ -82,10 +82,10 @@ const writeF = (fileName, content) => {
     const fname = resolve(`./${formatDate(new Date())}-${fileName}`);
     writeFileSync(fname, content, {
         encoding: 'utf-8',
-        flag:'w+'
+        flag: 'w+'
     });
-    
+
 };
 
 // bodyExecution.validar();
-(async () => console.log({ pessoa: await validar.cpf({ params: { cpf: '02623805115' } }) }))();
+(async () => console.log({ pessoa: await gerar.pessoa({ query: { txt_qtde: 1 } }) }))();
