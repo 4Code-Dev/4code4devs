@@ -1,7 +1,7 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
 
-const url = 'https://www.4devs.com.br/ferramentas_online.php'
+const url = process.env.FOURDEVS_URL || 'https://www.4devs.com.br/ferramentas_online.php'
 const config = {
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -80,15 +80,17 @@ const getValue = (el) => {
 }
 
 module.exports = {
-    pessoa: (req, res) => gerador('gerar_pessoa', req, res),
-    empresa: (req, res) => gerador('gerar_empresa', req, res),
-    cartao_credito: (req, res) => gerador('gerar_cc', req, res),
-    veiculo: (req, res) => gerador('gerar_veiculo', req, res),
-    conta_bancaria: (req, res) => gerador('gerar_conta_bancaria', req, res),
-    renavam: (req, res) => geradorNode('gerar_renavam', 'renavam', req, res),
-    cpf: (req, res) => geradorNode('gerar_cpf', 'cpf', req, res),
-    cnpj: (req, res) => geradorNode('gerar_cnpj', 'cnpj', req, res),
-    rg: (req, res) => geradorNode('gerar_rg', 'rg', req, res),
-    ie: (req, res) => geradorNode('gerar_ie', 'ie', req, res),
-    cnh: (req, res) => geradorNode('gerar_cnh', 'cnh', req, res),
+    gerador: {
+        pessoa: (req, res) => gerador('gerar_pessoa', req, res),
+        empresa: (req, res) => gerador('gerar_empresa', req, res),
+        cartao_credito: (req, res) => gerador('gerar_cc', req, res),
+        veiculo: (req, res) => gerador('gerar_veiculo', req, res),
+        conta_bancaria: (req, res) => gerador('gerar_conta_bancaria', req, res),
+        renavam: (req, res) => geradorNode('gerar_renavam', 'renavam', req, res),
+        cpf: (req, res) => geradorNode('gerar_cpf', 'cpf', req, res),
+        cnpj: (req, res) => geradorNode('gerar_cnpj', 'cnpj', req, res),
+        rg: (req, res) => geradorNode('gerar_rg', 'rg', req, res),
+        ie: (req, res) => geradorNode('gerar_ie', 'ie', req, res),
+        cnh: (req, res) => geradorNode('gerar_cnh', 'cnh', req, res)
+    }
 }
