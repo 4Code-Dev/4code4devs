@@ -1,5 +1,5 @@
 {
-  "name": "dev-tools",
+  "name": "4code4devs",
   "version": "1.0.0",
   "description": "Api simples com as ferramentas disponibilizadas pelo 4devs.com.br",
   "main": "./src/index.js",
@@ -9,7 +9,7 @@
     "prod": "node ./src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "DeividF",
+  "author": "Fabricio Santos",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
