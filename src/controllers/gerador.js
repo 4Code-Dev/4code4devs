@@ -81,11 +81,11 @@ const getValue = (el) => {
 
 module.exports = {
     gerador: {
-        pessoa: (req, res) => gerador('gerar_pessoa', req, res),
-        empresa: (req, res) => gerador('gerar_empresa', req, res),
-        cartao_credito: (req, res) => gerador('gerar_cc', req, res),
-        veiculo: (req, res) => gerador('gerar_veiculo', req, res),
-        conta_bancaria: (req, res) => gerador('gerar_conta_bancaria', req, res),
+        pessoa: (req, res) => geradorNode('gerar_pessoa', 'pessoa', req, res),
+        empresa: (req, res) => geradorNode('gerar_empresa', 'empresa', req, res),
+        cartao_credito: (req, res) => geradorNode('gerar_cc', 'cc', req, res),
+        veiculo: (req, res) => geradorNode('gerar_veiculo', 'veiculo', req, res),
+        conta_bancaria: (req, res) => geradorNode('gerar_conta_bancaria', 'conta_bancaria', req, res),
         renavam: (req, res) => geradorNode('gerar_renavam', 'renavam', req, res),
         cpf: (req, res) => geradorNode('gerar_cpf', 'cpf', req, res),
         cnpj: (req, res) => geradorNode('gerar_cnpj', 'cnpj', req, res),
