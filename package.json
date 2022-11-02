@@ -1,6 +1,6 @@
 {
   "name": "4code4devs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Api simples com as ferramentas disponibilizadas pelo 4devs.com.br",
   "main": "./src/index.js",
   "scripts": {
