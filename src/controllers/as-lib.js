@@ -1,6 +1,7 @@
 
 
 const axios = require('axios');
+const { geradorLib } = require('./controllers/generator');
 
 const url = process.env.FOURDEVS_URL || 'https://www.4devs.com.br/ferramentas_online.php'
 const config = {
@@ -14,7 +15,7 @@ const toUrlEncoded = obj => Object.keys(obj).map(k => encodeURIComponent(k) + '=
 
 const requestGerador = (method, req) => {
     console.log(method)
-    const body = req?.query ?? { query: { acao: 'gerar_pessoa' } }
+    const body = req?.query;
 
     if (method != null)
         body['acao'] = method
@@ -161,74 +162,6 @@ const validar = {
     titulo_eleitor: (req) => validador('validar_titulo_eleitor', 'titulo_eleitor', req),
 
 };
-/** gerar - grupo de funções para gerar alguns dados
-    * @object gerar
-    * */
-const gerar = {
-    /** Pessoa - Gera dados de um brasileiro
-    * @function pessoa
-    *  */
-    pessoa: (req) => gerador('gerar_pessoa', req),
-    /** Empresa - Gera dados de uma empresa
-    * @function empresa
-    * 
-    * @param {Object} req - object representing a request
-    * @param {Object} req.query - query of request
-    * @param {String} req.query.pontuacao - 'S',
-    * @param {String} req.query.estado - 'RO',
-    * @param {String} req.query.idade - '5' */
-    empresa: (req) => gerador('gerar_empresa', req),
-    /** Cartão de crédito - Gerar dados de um cartão a partir da bandeira do mesmo
-    
-    * @function cartao_credito
-    * 
-    * @param {Object} req - object representing a request
-    * @param {Object} req.query - query of request
-    * @param {String} req.query.pontuacao - 'S',
-    * @param {String} req.query.bandeira - 'master' */
-    cartao_credito: (req) => gerador('gerar_cc', req),
-    /** Veículo - Gera dados de um veiculo
-    * @function veiculo
-    * 
-    * @param {Object} req - object representing a request
-    * @param {Object} req.query - query of request
-    * @param {String} req.query.pontuacao - 'S' */
-    veiculo: (req) => gerador('gerar_veiculo', req),
-    /** Conta bancaria
-    * @function conta_bancaria
-    *  */
-    conta_bancaria: (req) => gerador('gerar_conta_bancaria', req),
-    /** Renavam
-    * @function renavam
-    * 
-    * @param {Object} req - object representing a request
-    * @param {Object} req.query - query of request
-    * @param {String} req.query.pontuacao - 'S' */
-    renavam: (req) => geradorNode('gerar_renavam', 'renavam', req),
-    /** Cpf
-    * @function cpf
-    * 
-    * @param {Object} req - object representing a request
-    * @param {Object} req.query - query of request
-    * @param {String} req.query.pontuacao - 'S' */
-    cpf: (req) => geradorNode('gerar_cpf', 'cpf', req),
-    /** Cnpj
-    * @function cnpj
-    * 
-    * @param {Object} req - object representing a request
-    * @param {Object} req.query - query of request
-    * @param {String} req.query.pontuacao - 'S' */
-    cnpj: (req) => geradorNode('gerar_cnpj', 'cnpj', req),
-    /** Inscrição estadual
-    * @function ie
-    * 
-    * @param {Object} req - object representing a request
-    * @param {Object} req.query - query of request
-    * @param {String} req.query.pontuacao - 'S',
-    * @param {String} req.query.estado - 'RO' */
-    ie: (req) => geradorNode('gerar_ie', 'ie', req)
-
-};
 module.exports = {
-    gerar, validar
+    gerar: geradorLib, validar
 }

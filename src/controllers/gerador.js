@@ -41,6 +41,24 @@ const gerador = async (method, req, res) => {
     }
 }
 
+
+const geradorLib = async (method, req, res) => {
+    const result = await request(method, req, res)
+    const content_type = result.headers['content-type']
+    try {
+        if (content_type.includes('json'))
+            return await json2json(result)
+        else if (content_type.includes('html'))
+            return await html2json(result)
+        else
+            return { erro: 'Não sei como fazer aqui não content type ' + content_type }
+
+    } catch (err) {
+        return { err };
+    }
+}
+
+
 // Caso a complexidado do metodo almente esta preparado com promise
 const json2json = async result => {
     return new Promise((resolve, reject) => {
@@ -86,5 +104,18 @@ module.exports = {
         rg: async (req, res) => await gerador('gerar_rg', 'rg', req, res),
         ie: async (req, res) => await gerador('gerar_ie', 'ie', req, res),
         cnh: async (req, res) => await gerador('gerar_cnh', 'cnh', req, res)
+    },
+    geradorLib: {
+        pessoa: async (req, res) => await geradorLib('gerar_pessoa', 'pessoa', req, res),
+        empresa: async (req, res) => await geradorLib('gerar_empresa', 'empresa', req, res),
+        cartao_credito: async (req, res) => await geradorLib('gerar_cc', 'cc', req, res),
+        veiculo: async (req, res) => await geradorLib('gerar_veiculo', 'veiculo', req, res),
+        conta_bancaria: async (req, res) => await geradorLib('gerar_conta_bancaria', 'conta_bancaria', req, res),
+        renavam: async (req, res) => await geradorLib('gerar_renavam', 'renavam', req, res),
+        cpf: async (req, res) => await geradorLib('gerar_cpf', 'cpf', req, res),
+        cnpj: async (req, res) => await geradorLib('gerar_cnpj', 'cnpj', req, res),
+        rg: async (req, res) => await geradorLib('gerar_rg', 'rg', req, res),
+        ie: async (req, res) => await geradorLib('gerar_ie', 'ie', req, res),
+        cnh: async (req, res) => await geradorLib('gerar_cnh', 'cnh', req, res)
     }
 }
