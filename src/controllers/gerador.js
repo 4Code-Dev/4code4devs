@@ -23,12 +23,6 @@ const request = (method, req, res) => {
     return axios.post(url, toUrlEncoded(body), config)
 }
 
-const geradorNode = async (method, key, req, res) => {
-    const result = await request(method, req, res)
-    let json = {}
-    json[key] = result.data
-    res.json(json)
-}
 const gerador = async (method, req, res) => {
     const result = await request(method, req, res)
     const content_type = result.headers['content-type']
@@ -81,16 +75,16 @@ const getValue = (el) => {
 
 module.exports = {
     gerador: {
-        pessoa: (req, res) => geradorNode('gerar_pessoa', 'pessoa', req, res),
-        empresa: (req, res) => geradorNode('gerar_empresa', 'empresa', req, res),
-        cartao_credito: (req, res) => geradorNode('gerar_cc', 'cc', req, res),
-        veiculo: (req, res) => geradorNode('gerar_veiculo', 'veiculo', req, res),
-        conta_bancaria: (req, res) => geradorNode('gerar_conta_bancaria', 'conta_bancaria', req, res),
-        renavam: (req, res) => geradorNode('gerar_renavam', 'renavam', req, res),
-        cpf: (req, res) => geradorNode('gerar_cpf', 'cpf', req, res),
-        cnpj: (req, res) => geradorNode('gerar_cnpj', 'cnpj', req, res),
-        rg: (req, res) => geradorNode('gerar_rg', 'rg', req, res),
-        ie: (req, res) => geradorNode('gerar_ie', 'ie', req, res),
-        cnh: (req, res) => geradorNode('gerar_cnh', 'cnh', req, res)
+        pessoa: async (req, res) => await gerador('gerar_pessoa', 'pessoa', req, res),
+        empresa: async (req, res) => await gerador('gerar_empresa', 'empresa', req, res),
+        cartao_credito: async (req, res) => await gerador('gerar_cc', 'cc', req, res),
+        veiculo: async (req, res) => await gerador('gerar_veiculo', 'veiculo', req, res),
+        conta_bancaria: async (req, res) => await gerador('gerar_conta_bancaria', 'conta_bancaria', req, res),
+        renavam: async (req, res) => await gerador('gerar_renavam', 'renavam', req, res),
+        cpf: async (req, res) => await gerador('gerar_cpf', 'cpf', req, res),
+        cnpj: async (req, res) => await gerador('gerar_cnpj', 'cnpj', req, res),
+        rg: async (req, res) => await gerador('gerar_rg', 'rg', req, res),
+        ie: async (req, res) => await gerador('gerar_ie', 'ie', req, res),
+        cnh: async (req, res) => await gerador('gerar_cnh', 'cnh', req, res)
     }
 }
