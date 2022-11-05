@@ -25,22 +25,6 @@ const requestGerador = (method, req) => {
     return axios.post(url, toUrlEncoded(body), config)
 }
 
-const geradorNode = async (method, key, req) => {
-    const result = await requestGerador(method, req)
-    let json = {}
-    json[key] = result.data
-    return json;
-}
-const gerador = async (method, req) => {
-    try {
-        const { data } = await requestGerador(method, req);
-        return data;
-    } catch (err) {
-        throw err;
-    }
-}
-
-
 
 const requestValidador = (method, key, req) => {
     console.log(method)
