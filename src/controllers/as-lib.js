@@ -1,7 +1,7 @@
 
 
 const axios = require('axios');
-const { geradorLib } = require('./controllers/generator');
+const { geradorLib } = require('./gerador');
 
 const url = process.env.FOURDEVS_URL || 'https://www.4devs.com.br/ferramentas_online.php'
 const config = {
@@ -15,7 +15,7 @@ const toUrlEncoded = obj => Object.keys(obj).map(k => encodeURIComponent(k) + '=
 
 const requestGerador = (method, req) => {
     console.log(method)
-    const body = req?.query;
+    const body = req?.query  ?? { acao: method };
 
     if (method != null)
         body['acao'] = method

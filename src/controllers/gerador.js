@@ -13,12 +13,24 @@ const toUrlEncoded = obj => Object.keys(obj).map(k => encodeURIComponent(k) + '=
 
 const request = (method, req, res) => {
     console.log(method)
-    const body = req.query
+    const body = req?.query ?? { acao: method }
 
     if (method != null)
         body['acao'] = method
     if (req.query.acao == 'undefined')
         res.json({ erro: 'paramentro acao é um campo obrigatorio :)' })
+
+    return axios.post(url, toUrlEncoded(body), config)
+}
+const requestLib = (method, req) => {
+    console.log({ method });
+
+    const acao = method ?? req?.query?.acao;
+    const body = { ...req?.query , acao };
+
+
+    if (!body.acao)
+        return { erro: 'paramentro acao é um campo obrigatorio :)' };
 
     return axios.post(url, toUrlEncoded(body), config)
 }
@@ -42,8 +54,8 @@ const gerador = async (method, req, res) => {
 }
 
 
-const geradorLib = async (method, req, res) => {
-    const result = await request(method, req, res)
+const geradorLib = async (method,  req) => {
+    const result = await requestLib(method, req)
     const content_type = result.headers['content-type']
     try {
         if (content_type.includes('json'))
@@ -106,16 +118,16 @@ module.exports = {
         cnh: async (req, res) => await gerador('gerar_cnh', 'cnh', req, res)
     },
     geradorLib: {
-        pessoa: async (req, res) => await geradorLib('gerar_pessoa', 'pessoa', req, res),
-        empresa: async (req, res) => await geradorLib('gerar_empresa', 'empresa', req, res),
-        cartao_credito: async (req, res) => await geradorLib('gerar_cc', 'cc', req, res),
-        veiculo: async (req, res) => await geradorLib('gerar_veiculo', 'veiculo', req, res),
-        conta_bancaria: async (req, res) => await geradorLib('gerar_conta_bancaria', 'conta_bancaria', req, res),
-        renavam: async (req, res) => await geradorLib('gerar_renavam', 'renavam', req, res),
-        cpf: async (req, res) => await geradorLib('gerar_cpf', 'cpf', req, res),
-        cnpj: async (req, res) => await geradorLib('gerar_cnpj', 'cnpj', req, res),
-        rg: async (req, res) => await geradorLib('gerar_rg', 'rg', req, res),
-        ie: async (req, res) => await geradorLib('gerar_ie', 'ie', req, res),
-        cnh: async (req, res) => await geradorLib('gerar_cnh', 'cnh', req, res)
+        pessoa: async (req) => await geradorLib('gerar_pessoa', req),
+        empresa: async (req) => await geradorLib('gerar_empresa', req),
+        cartao_credito: async (req) => await geradorLib('gerar_cc', req),
+        veiculo: async (req) => await geradorLib('gerar_veiculo', req),
+        conta_bancaria: async (req) => await geradorLib('gerar_conta_bancaria', req),
+        renavam: async (req) => await geradorLib('gerar_renavam', req),
+        cpf: async (req) => await geradorLib('gerar_cpf', req),
+        cnpj: async (req) => await geradorLib('gerar_cnpj', req),
+        rg: async (req) => await geradorLib('gerar_rg', req),
+        ie: async (req) => await geradorLib('gerar_ie', req),
+        cnh: async (req) => await geradorLib('gerar_cnh', req)
     }
 }
